@@ -1,3 +1,4 @@
+import 'package:firebasetesting/controller/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebasetesting/common/common_widget.dart';
 
@@ -9,6 +10,9 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +62,13 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
 
             const SizedBox(height: 24.0),
-            CommonWidget.buildButton('SignUp', () {
-              
+            CommonWidget.buildButton('SignUp', () async {
+              SignupController controller = SignupController();
+              await controller.sighUpUser(
+                emailController.text,
+                passwordController.text,
+                context,
+              );
             }),
           ],
         ),
